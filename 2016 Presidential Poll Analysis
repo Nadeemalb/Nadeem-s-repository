@@ -1,0 +1,39 @@
+# Candidate names
+Name <- c("Jeb", "Donald", "Ted", "Marco", "Carly", "Hillary", "Bernie")
+
+# Poll results from ABC
+ABC_poll_results <- c(4, 62, 51, 21, 2, 14, 15)
+
+# Poll results from CBS
+CBS_poll_results <- c(12, 75, 43, 19, 1, 21, 19)
+
+# Combine into a dataframe
+poll_data <- data.frame(Name, ABC_poll_results, CBS_poll_results)
+
+# View the data
+print(poll_data)
+
+# Calculate the mean of the poll results for each source
+mean_ABC <- mean(poll_data$ABC_poll_results)
+mean_CBS <- mean(poll_data$CBS_poll_results)
+
+# Display the means
+print(paste("Mean ABC poll result:", mean_ABC))
+print(paste("Mean CBS poll result:", mean_CBS))
+
+# Load ggplot2 for data visualization
+library(ggplot2)
+
+# Reshape data for better plotting
+poll_data_long <- reshape(poll_data, 
+                          varying = c("ABC_poll_results", "CBS_poll_results"), 
+                          v.names = "Poll_Result", 
+                          timevar = "Poll_Source", 
+                          times = c("ABC", "CBS"), 
+                          direction = "long")
+
+# Plot the data
+ggplot(poll_data_long, aes(x = Name, y = Poll_Result, fill = Poll_Source)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Poll Results Comparison: ABC vs CBS", x = "Candidate", y = "Poll Result (%)") +
+  theme_minimal()
