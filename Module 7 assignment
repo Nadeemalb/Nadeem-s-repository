@@ -1,0 +1,70 @@
+Module-7-assignment.R
+user
+2025-03-02
+data(mtcars)
+head(mtcars)
+##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+library(ggplot2)
+
+# Histogram for mpg (miles per gallon) from mtcars dataset
+ggplot(mtcars, aes(x = mpg)) + 
+  geom_histogram(binwidth = 2, fill = "skyblue", color = "black") +
+  theme_minimal() +
+  labs(title = "Distribution of Miles Per Gallon (mpg)", x = "Miles Per Gallon", y = "Frequency")
+
+
+ggplot(mtcars, aes(x = mpg)) +
+  geom_density(fill = "skyblue", color = "black") +
+  theme_minimal() +
+  labs(title = "Density Plot of Miles Per Gallon", x = "Miles Per Gallon", y = "Density")
+
+
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point(color = "blue") +
+  theme_minimal() +
+  labs(title = "Scatter Plot of mpg vs wt", x = "Weight", y = "Miles Per Gallon")
+
+
+library(gridExtra)
+
+# Create multiple histograms to compare variables
+plot1 <- ggplot(mtcars, aes(x = mpg)) +
+  geom_histogram(binwidth = 2, fill = "skyblue", color = "black") +
+  theme_minimal() + labs(title = "mpg")
+
+plot2 <- ggplot(mtcars, aes(x = hp)) +
+  geom_histogram(binwidth = 10, fill = "skyblue", color = "black") +
+  theme_minimal() + labs(title = "hp")
+
+grid.arrange(plot1, plot2, ncol = 2)
+
+
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point(color = "blue") +
+  facet_wrap(~ gear) +  # Facet by the number of gears
+  theme_minimal() +
+  labs(title = "Scatter Plot of mpg vs wt, Faceted by Gear")
+
+I am unable to attach the compiled html file type on GitHub, therefore, I provided the necessary code on the file that is used to create my visuals to display on my GitHub. 
+
+Analysis and Testing Few’s Recommendations
+
+Stephen Few's recommendations for data visualization, particularly for distribution analysis, often include:
+
+Simplification: Avoid unnecessary clutter and complexity. In your visualizations, use clean, minimal designs that help the user focus on the distribution of data without distractions.
+
+Grid Layouts: When comparing multiple variables, use grid layouts (e.g., facet_wrap) to avoid having separate, disjointed plots. This enables a direct comparison between distributions, making it easier for the viewer to see patterns or differences.
+
+Clear Axes and Labels: Make sure that axes are clearly labeled, and units of measurement are included, which helps the viewer understand what is being plotted and makes the visualization more accessible.
+
+Opinion on Few’s Recommendations:
+
+In your testing, you might find that Few’s emphasis on clarity and comparison through grid layouts helps make the analysis more intuitive. The ability to compare distributions side by side in a grid layout allows you to spot relationships and trends more easily than if the plots were presented separately.
+
+For example, comparing mpg with horsepower (hp) or weight (wt) in separate histograms or scatter plots might obscure the relationships between these variables, while a grid of plots or a faceted scatter plot could provide insights on how these variables interrelate.
