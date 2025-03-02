@@ -1,0 +1,83 @@
+R Object: S3 vs. S4
+For this assignment, I am going to use a publicly available dataset. I'll be using the mtcars dataset in R, which is commonly used for testing and exploring various R functionalities.
+
+# Load the 'mtcars' dataset
+data("mtcars")
+
+# Show the first 6 rows of the dataset
+head(mtcars, 6)
+﻿
+The mtcars dataset consists of several variables (columns), such as miles per gallon (mpg), number of cylinders (cyl), horsepower (hp), and others. It is a data frame, a structure that can hold data of different types (e.g., numeric, character).
+
+Step 2: Determine if a Generic Function Can Be Assigned to the Dataset
+In R, a generic function refers to a function that operates differently based on the class of the object passed to it. For example, print() is a generic function that behaves differently depending on the class of the object (e.g., data frame, list, matrix).
+
+To see if a generic function can be assigned to the dataset, we will explore whether mtcars can be passed to generic functions like print() and whether the function adapts to the object’s structure.
+
+# Generic function print
+print(mtcars)
+
+# Apply a summary (another generic function)
+summary(mtcars)
+﻿
+Both functions, print() and summary(), are generic, meaning that they behave differently depending on the class of the object. Since mtcars is a data frame, these functions will give different outputs compared to other types of objects like vectors or lists.
+
+Conclusion: Yes, generic functions like print() and summary() can be assigned to the mtcars dataset, since data frames are one of the base R types that are compatible with these functions.
+
+Step 3: Explore If S3 and S4 Can Be Assigned to the Dataset
+Next, we explore how we can assign the mtcars dataset to both S3 and S4 object systems.
+
+S3 System:
+In the S3 system, we don't need to explicitly declare classes or slots (like we do in S4). Instead, we work with a simpler approach, where the class of an object is associated dynamically. Here I am assigning mtcars to an S3 object:
+
+# Convert mtcars to an S3 object by assigning a class to it
+class(mtcars) <- "custom_mtcars"
+
+# Print the class of mtcars
+class(mtcars)
+﻿
+In this section, mtcars has been given a new class "custom_mtcars". Now, we can create a method for this class if needed.
+
+S4 System:
+For the S4 system, we need to define a formal class and structure for the object. To work with S4, we would create a custom class and define slots (attributes) explicitly. Now we will create an S4 object for a student dataset:
+
+# Define an S4 class
+setClass("student", 
+         slots = c(name = "character", age = "numeric", GPA = "numeric"))
+
+# Create an instance of the 'student' class
+s4 <- new("student", name = "John", age = 20, GPA = 3.7)
+
+# Print the S4 object
+s4
+﻿
+Here, we defined a class student with three slots: name, age, and GPA. We then created an object of this class using the new() function, and printed it.
+
+Blog Discussion
+How do you tell what OO system (S3 vs. S4) an object is associated with?
+To determine whether an object is associated with the S3 or S4 system, I can use the class() function. If the object is part of the S3 system, it will return a simple class name (e.g., "data.frame"). For S4 objects, I can use is() to check the class or slotNames() to view the slots of the object.
+
+Code:
+
+class(mtcars)  # for S3 object
+is(s4, "student")  # for S4 object
+﻿
+How do you determine the base type (like integer or list) of an object?
+To determine the base type of an object, I can use functions like typeof(), mode(), and class(). typeof() gives you the internal type of the object, mode() shows its storage mode, and class() gives you its high-level class.
+
+Code:
+
+typeof(mtcars)  # For the 'mtcars' data frame
+mode(s4)  # For the 's4' student object
+﻿
+What is a generic function?
+A generic function in R is a function that behaves differently depending on the class of the object it is applied to. Examples include print(), summary(), and plot(). A generic function dynamically dispatches based on the class of the object.
+
+What are the main differences between S3 and S4?
+S3: S3 is a simpler, more flexible system that assigns classes to objects dynamically. It doesn’t require formal class definitions, and methods are dispatched based on the class attribute.
+S4: S4 is more formal and rigorous. It requires explicit definition of classes with defined slots (attributes). It supports multiple inheritance and checks for type consistency, making it more suitable for complex, structured data.
+GitHub Examples of S3 and S4
+Here is how I can structure the code examples for S3 and S4 in my GitHub repository:
+
+S3 Example (Custom Class for a Data Frame): # Define custom class for data frame data("mtcars") class(mtcars) <- "custom_mtcars" # Create a custom method for print print.custom_mtcars <- function(x) { cat("This is a custom print for mtcars\n") print(head(x)) } # Test the custom print method print(mtcars)
+S4 Example (Student Object): # Define the 'student' S4 class setClass("student", slots = c(name = "character", age = "numeric", GPA = "numeric")) # Create an S4 object s4_student <- new("student", name = "Jane", age = 22, GPA = 3.9) # Show the S4 object s4_student
