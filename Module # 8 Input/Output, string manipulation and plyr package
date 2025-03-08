@@ -1,0 +1,21 @@
+# Step 1: Import dataset and calculate mean by Sex
+install.packages("plyr")
+library(plyr)
+library(data.table)
+
+# Import dataset
+Student_assignment_6 <- read.table(file.choose(), header = TRUE, sep = ",")
+print(Student_assignment_6)
+
+# Calculate mean grade by Sex
+StudentAverage <- ddply(Student_assignment_6, "Sex", transform, Grade.Average = mean(Grade))
+
+# Write output to CSV
+write.table(StudentAverage, "Sorted_Average.csv", sep = ",", row.names = FALSE)
+
+# Step 2: Filter students with names containing the letter 'i'
+i_students <- subset(Student_assignment_6, grepl("[iI]", Student_assignment_6$Name))
+
+# Write the filtered data to CSV
+write.table(i_students, "Filtered_Students.csv", sep = ",", row.names = FALSE)
+
