@@ -1,0 +1,52 @@
+For this task, I'll create a multivariate graph using RStudio and the ggplot2 package. Here's the outline for the dataset and how I will approach this visualization:
+
+The dataset is from a sales company, where we have the following variables:
+
+Product Category
+
+Sales Revenue
+
+Quantity Sold
+
+Region
+
+Time Period
+
+I'll use ggplot2 in R to visualize the relationship between these variables. The goal is to analyze how sales revenue and quantity sold vary across different regions and product categories over time.
+
+Sales Revenue and Quantity Sold are plotted on the x and y axes, respectively.
+
+Color represents the Product Category, and Size reflects the Sales Revenue.
+
+Facet Wrap creates separate plots for each Region.
+
+This gives a clear visualization of how the two variables (Sales Revenue and Quantity Sold) behave across different categories and regions over time.
+
+Judging the Effectiveness of Multivariable Visualization
+The multivariate visualization works well in this context, as it allows us to see patterns and relationships between multiple variables simultaneously. This type of plot:
+
+Shows the relationship between Sales Revenue and Quantity Sold, segmented by Region and Product Category.
+
+Highlights how different Regions perform in terms of Sales Revenue and Quantity Sold, with different product categories appearing in distinct colors.
+
+However, the effectiveness depends on the context and the complexity of the data. For simpler datasets, it may not add much value, but for complex datasets with multiple dimensions, this kind of visualization is extremely helpful.
+
+Applying the 5 Principles/Rules of Design
+
+Contrast: I use distinct colors for each Product Category and different sizes for Sales Revenue to create contrast. This makes it easy to differentiate categories and their relationships with the plotted variables.
+
+Repetition: I repeat the use of color to indicate Product Category across all facets, creating consistency and reinforcing the visualization's message.
+
+Alignment: The axes are aligned properly, with Sales Revenue on the x-axis and Quantity Sold on the y-axis. The facets are aligned to show the regions systematically.
+
+Proximity: The data points are grouped within their respective Regions, and this proximity helps us identify patterns and differences within each region, as well as across regions.
+
+White Space: The plot uses minimalist design and keeps the background clean with ample white space. This helps reduce visual clutter and enhances readability.
+
+Feedback from Brett Waugh’s Assignment (2019)
+Brett Waugh’s visualization in his blog post employs a very clean and effective multivariate design. The approach of combining multiple variables into a clear and readable visualization inspired this example. Similar to his work, I aim to keep the design simple yet informative by using appropriate scales, labeling, and color coding.
+
+Discussion on the Use of Multi-Variate Visualizations
+Multivariate visualizations can sometimes overwhelm the viewer, especially if too many variables are included or if the graph is too complex. It’s essential to carefully select which variables to include in the graph to avoid confusion. For example, if there are too many variables, it might be better to use multiple simpler visualizations or a pairplot to focus on specific variable pairs at a time. The key is to keep the graph clear, avoid unnecessary decoration, and highlight only the most important relationships between variables.
+
+In conclusion, multivariate visualizations are highly valuable for understanding relationships between multiple variables simultaneously. With careful design principles, they can present complex data in a digestible form. Using clear labeling, appropriate scaling, and color schemes ensures the visualization is both informative and visually appealing.
