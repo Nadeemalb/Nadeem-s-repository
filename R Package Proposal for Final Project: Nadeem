@@ -1,0 +1,40 @@
+For my final project, I plan to develop an R package named "Nadeem". This package will be focused on providing tools to conduct the Nadeem Test and other related non-parametric statistical methods. The Nadeem Test will be designed to work specifically with repeated measures data, making it particularly useful for researchers in fields like psychology, medicine, and economics.
+
+The DESCRIPTION file provides essential metadata about the R package, such as the package's purpose, authorship, and its dependencies. Below is a draft version of the DESCRIPTION file for the Nadeem package:
+
+Package: Nadeem
+Title: A Package for Performing the Nadeem Test and Non-Parametric Statistical Tests
+Version: 0.0.0.9000
+Authors@R: "Nadeem Al Barwani nadeem.albarwani@example.com [aut, cre]"
+Description: This package provides functions to perform the Nadeem Test and other related non-parametric statistical tests. It is designed to analyze repeated measures data and detect significant differences across multiple treatments or conditions.
+Depends: R (>= 3.1.2)
+Imports: stats, dplyr, ggplot2
+License: CC0
+LazyData: true
+Breakdown of the DESCRIPTION Fields:
+
+Package: The name of the package is Nadeem, named after the author to reflect the personalization and ownership of the statistical method.
+
+Title: The title is a concise one-liner: "A Package for Performing the Nadeem Test and Non-Parametric Statistical Tests," explaining the core functionality of the package.
+
+Version: The version number starts at 0.0.0.9000, indicating this is a development version. This number will be incremented as development progresses.
+
+Authors@R: The author and maintainer of the package is Nadeem Al Barwani, listed with the format aut for author and cre for maintainer.
+
+Description: The description succinctly explains that the package provides functions for the Nadeem Test and other non-parametric statistical tests, tailored to analyzing repeated measures data.
+
+Depends: This field indicates the package depends on R version 3.1.2 or higher.
+
+Imports: The stats package is used for statistical functions like friedman.test(), while dplyr and ggplot2 are imported for data manipulation and visualization purposes.
+
+License: The package will be released under the CC0 license, meaning it will be placed in the public domain for free use, modification, and redistribution.
+
+LazyData: This is set to true to improve memory management by loading datasets more efficiently.
+
+Final Project Proposal on the Blog
+
+In my final project blog post, I will dive into the development of the Nadeem R package. The post will discuss the motivation behind creating the package, its intended functionality, and how it aims to simplify the process of conducting non-parametric statistical tests such as the Nadeem Test. Additionally, I will explain the key components of the DESCRIPTION file, including the dependencies, author roles, and license choices.
+
+The blog will also highlight how the Nadeem Test can be especially valuable in fields where repeated measures data is common, such as in experimental psychology, medical research, and social science studies. I will compare the Nadeem Test to more traditional methods like ANOVA and explain why non-parametric approaches can be useful in certain situations.
+
+The Nadeem R package will offer a user-friendly tool for conducting non-parametric statistical tests, especially the Nadeem Test, tailored to the analysis of repeated measures data. The DESCRIPTION file outlines the purpose, dependencies, and licenses, ensuring transparency and accessibility for anyone looking to use the package. By sharing it on GitHub, I aim to make the package open-source and widely available to the community.
