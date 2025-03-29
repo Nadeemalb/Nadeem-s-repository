@@ -1,0 +1,95 @@
+Time series analysis plays a significant role in understanding trends, patterns, and insights over time, whether in economics, business, or even pop culture. One of the most powerful ways to visualize time series data is through the ggplot2 package in R. In this post, I’ll explore two examples of time series data visualizations using ggplot2 and discuss the impact of these visualizations in time series analysis.
+
+Example 1: Nathan’s Hot Dog Eating Contest Results
+
+In this example, I used data from Nathan's Hot Dog Eating Contest to create visualizations showcasing the number of hot dogs eaten over the years (1980-2010). The dataset includes columns for the year, the number of hot dogs eaten, and whether the result was a new record.
+
+Visualization 1: Basic Bar Chart with R Base Graphics
+
+Using R base graphics, I first created a simple bar plot:
+
+hotdogs <- read_csv("http://datasets.flowingdata.com/hot-dog-contest-winners.csv")
+head(hotdogs)
+library("ggplot2")
+colors <- ifelse(hotdogs$New.record == 1, "darkred", "grey")
+barplot(hotdogs$Dogs.eaten, names.arg = hotdogs$Year, col=colors, border=NA,
+main = "Nathan's Hot Dog Eating Contest Results, 1980-2010",
+xlab="Year", ylab="Hot dogs and buns (HDBs) eaten")
+
+Analysis: This bar plot is quite simple but effectively conveys the number of hot dogs eaten each year. The color-coding shows whether a new record was set (dark red for new records, grey for others), which makes it easier to spot milestones.
+
+Visualization 2: ggplot2 Bar Chart
+Next, I used ggplot2 to create a more sophisticated version of the same bar chart:
+
+ggplot(hotdogs) +
+geom_bar(aes(x=Year, y=Dogs.eaten, fill=factor(New.record)), stat="identity") +
+labs(title="Nathan's Hot Dog Eating Contest Results, 1980-2010", fill="New Record") +
+xlab("Year") + ylab("Hot dogs and buns (HDBs) eaten")
+
+Analysis: The ggplot2 version is cleaner, with an automatic legend indicating whether a new record was set. The color scheme differentiates the years when new records were set, helping viewers quickly identify the major milestones in the contest.
+
+Visualization 3: Stacked Bar Plot
+Finally, using R base graphics, I created a stacked bar plot to showcase the breakdown of hot dogs eaten by year:
+
+hotdog_places <- as.matrix(hotdog_places)
+colnames(hotdog_places) <- lapply(2000:2010, as.character)
+barplot(hotdog_places, border=NA, main="Hot Dog Eating Contest Results, 1980-2010",
+xlab="Year", ylab="Hot dogs and buns (HDBs) eaten")
+
+Analysis: This stacked bar plot was intended to show the relative distribution of hot dogs eaten over time, though it could be improved by further distinguishing between new records and other years. Stacked bar charts can be very useful when comparing multiple groups across time, but here it could potentially confuse the viewer with overlapping data.
+
+Example 2: Economics Data with ggplot2
+For the second example, I used the economics dataset available in ggplot2, which includes data on unemployment, population, and other economic indicators. I created a line plot to show trends in unemployment over time and explored the relationship between the unemployment rate and the median duration of unemployment.
+
+Visualization 1: Unemployment Rate Over Time
+
+head(economics)
+year <- function(x) as.POSIXlt(x)$year + 1900
+economics$year <- year(economics$date)
+plot1 <- qplot(date, unemploy / pop, data = economics, geom = "line")
+plot1
+
+Analysis: The line plot provides a clear visualization of the unemployment rate over time, giving us insights into economic fluctuations. The simplicity of the line plot allows us to focus on the overall trend without distraction.
+
+Visualization 2: Median Duration of Unemployment
+
+plot2 <- qplot(date, uempmed, data = economics, geom = "line")
+grid.arrange(plot1, plot2, ncol=2)
+
+Analysis: This second line plot focuses on the median duration of unemployment, and when paired with the first plot, we can compare how both indicators evolved over time. The side-by-side comparison helps highlight trends and correlations between the unemployment rate and median duration.
+
+Visualization 3: Relationship Between Unemployment Rate and Median Duration
+
+plot1 <- qplot(unemploy/pop, uempmed, data = economics, geom = c("point", "path"))
+plot2 <- qplot(unemploy/pop, uempmed, data = economics, geom = c("point", "path"), color=year)
+grid.arrange(plot1, plot2, ncol=2)
+plot2
+
+Analysis: In this plot, the relationship between the unemployment rate and the median duration of unemployment is visualized with points and connecting lines. The second plot also adds color coding by year, providing a clearer perspective on how the relationship evolves over time.
+
+The Role of Visualization in Time Series Analysis
+Visualizing time series data is essential for identifying trends, cycles, and outliers. It helps analysts make informed decisions by providing a clear overview of how a particular variable behaves over time. The impact of visualization in time series analysis is particularly strong because it allows us to:
+
+Spot trends: For example, we can see how the unemployment rate has changed over time.
+
+Identify anomalies: New records in hot dog eating contests stand out in the bar chart, helping us spot extreme data points.
+
+Compare variables: In the economics dataset, we can compare different economic indicators like unemployment rate and median unemployment duration side-by-side.
+
+Effective time series visualizations not only make data more accessible but also guide us in forming hypotheses and making predictions. Tools like ggplot2 are invaluable for anyone working with time-based data, as they allow us to create compelling visual narratives from complex data.
+
+Rubric Feedback
+
+Style of the Visualization: The primary style used is the bar graph (e.g., hot dog contest) and line graph (e.g., economics data). These styles are effective in showing trends and distributions.
+
+Subjective Evaluation: I find the ggplot2 visualizations effective, as they cleanly show patterns and trends. The color coding in the hot dog contest dataset makes milestones stand out clearly.
+
+Headline Accuracy: The headlines are accurate and reflective of the data. The title for the hot dog contest clearly conveys the focus on contest results over time, and the economics headline reflects the focus on unemployment trends.
+
+Visualization Support for the Narrative: Each graph effectively supports its respective narrative. The hot dog contest results show trends over time, while the economics graphs highlight trends in unemployment and related factors.
+
+Misleading Visualization: No misleading elements were present in the visualizations. The data is presented in a straightforward and honest way.
+
+Unnecessary Graphic Elements: There are no unnecessary elements in these visualizations. The designs focus on clarity.
+
+Like or Dislike: I like the visualizations for their clean layout, color scheme, and informative structure. The use of color in ggplot2 helps emphasize important data points.
