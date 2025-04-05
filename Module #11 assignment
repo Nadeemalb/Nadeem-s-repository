@@ -1,0 +1,47 @@
+Source Code: 
+install.packages(c("CarletonStats", "devtools", "epanetReader", "fmsb", "ggplot2", "ggthemes", "latticeExtra", "MASS", "PerformanceAnalytics", "psych", "plyr", "prettyR", "plotrix", "proto", "RCurl", "reshape", "reshape2"))
+library("CarletonStats")
+library("devtools")
+library("epanetReader")
+library("fmsb")
+library("ggplot2")
+library("ggthemes")
+library("latticeExtra")
+library("MASS")
+library("PerformanceAnalytics")
+library("psych")
+library("plyr")
+library("prettyR")
+library("plotrix")
+library("proto")
+library("RCurl")
+library("reshape")
+library("reshape2")
+
+x <- 1967:1977
+y <- c(0.5, 1.8, 4.6, 5.3, 5.3, 5.7, 5.4, 5, 5.5, 6, 5)
+
+
+data <- data.frame(year = x, expenditure = y)
+
+library(ggplot2)
+
+
+ggplot(data, aes(x = year, y = expenditure)) +
+  geom_point(shape = 16, size = 3) +
+  geom_line(linetype = "dashed", size = 1) + 
+  labs(title = "Per Capita Budget Expenditures Over Time", 
+       x = "Year", 
+       y = "Expenditure (in constant dollars)") + 
+  theme_minimal()
+
+
+pdf("dot_dash_plot.pdf", width = 10, height = 6)
+ggplot(data, aes(x = year, y = expenditure)) +
+  geom_point(shape = 16, size = 3) +
+  geom_line(linetype = "dashed", size = 1) +
+  labs(title = "Per Capita Budget Expenditures Over Time", 
+       x = "Year", 
+       y = "Expenditure (in constant dollars)") +
+  theme_minimal()
+dev.off()
