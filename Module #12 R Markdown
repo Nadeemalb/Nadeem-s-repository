@@ -1,0 +1,147 @@
+/my-final-project
+│
+├── functions_documentation.Rmd
+└── blog_post.md
+---
+title: "Final Project Function Documentation"
+author: "Your Name"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+# Overview
+
+This file documents the main functions developed for my final project in R. Each function is explained in terms of its **purpose**, **inputs**, **outputs**, and **usage examples**. These functions form the core logic of my analysis and automation processes.
+
+---
+
+## Function 1: `clean_data()`
+
+### Description
+This function takes a raw dataset and performs data cleaning operations, including removing missing values, trimming whitespace, and standardizing column names.
+
+### Inputs
+- `df` *(data.frame)*: The raw data frame to clean.
+
+### Outputs
+- A cleaned data frame with standardized column names and no NA values.
+
+### Code
+
+```r
+clean_data <- function(df) {
+  df <- na.omit(df)
+  names(df) <- tolower(gsub("\\s+", "_", names(df)))
+  return(df)
+}
+Example
+
+raw_data <- read.csv("data.csv")
+cleaned <- clean_data(raw_data)
+head(cleaned)
+
+Function 2: summarize_by_group()
+Description
+Summarizes a numeric variable by group using mean, median, and standard deviation.
+
+Inputs
+df (data.frame): Dataset containing the group and numeric variable.
+
+group_var (string): Name of the grouping column.
+
+numeric_var (string): Name of the numeric column to summarize.
+
+Outputs
+A data frame summarizing the numeric variable for each group.
+
+Code
+
+summarize_by_group <- function(df, group_var, numeric_var) {
+  df %>%
+    group_by(.data[[group_var]]) %>%
+    summarize(
+      mean = mean(.data[[numeric_var]], na.rm = TRUE),
+      median = median(.data[[numeric_var]], na.rm = TRUE),
+      sd = sd(.data[[numeric_var]], na.rm = TRUE)
+    )
+}
+Example
+
+library(dplyr)
+summary <- summarize_by_group(cleaned, "category", "value")
+print(summary)
+
+Function 3: plot_distribution()
+Description
+Creates a histogram of a specified numeric column.
+
+Inputs
+df (data.frame): Dataset containing the numeric column.
+
+numeric_var (string): Name of the numeric column.
+
+bins (integer): Number of bins for the histogram. Default is 30.
+
+Outputs
+A ggplot histogram.
+
+Code
+
+library(ggplot2)
+
+plot_distribution <- function(df, numeric_var, bins = 30) {
+  ggplot(df, aes_string(x = numeric_var)) +
+    geom_histogram(bins = bins, fill = "skyblue", color = "black") +
+    theme_minimal() +
+    labs(title = paste("Distribution of", numeric_var))
+}
+Example
+
+plot_distribution(cleaned, "value", 25)
+
+Reflections & Challenges
+While developing these functions, I encountered several challenges related to:
+
+Dynamic variable referencing using dplyr and ggplot2
+
+Handling missing data consistently across different types of datasets
+
+Making functions reusable and clean
+
+I addressed these by leveraging non-standard evaluation and thorough testing.
+
+---
+
+```markdown
+# Using R Markdown to Document R Functions
+
+## What is R Markdown?
+
+R Markdown is a versatile tool that allows you to combine narrative text with code and output in a single document. It enables data scientists and analysts to create documents that are reproducible, well-documented, and easy to share. With R Markdown, you can generate reports in HTML, PDF, or Word formats that automatically include code, outputs, and visualizations.
+
+## Purpose of This Assignment
+
+In this assignment, I created an R Markdown file that documents the main functions developed for my final project. These functions handle data cleaning, summarization, and visualization tasks in a reusable way. The Markdown file includes:
+
+- Clear documentation of each function's purpose
+- Descriptions of inputs and outputs
+- Code snippets and usage examples
+- Reflections on development and challenges
+
+## Why R Markdown is Helpful
+
+Using R Markdown helped me:
+
+- Keep my work organized and readable
+- Create a live document that combines code and explanation
+- Easily share my functions and thought process with others
+- Build a professional-looking portfolio piece for GitHub
+
+## What I Created
+
+I developed and documented three key functions:
+1. `clean_data()` – Cleans and standardizes raw datasets.
+2. `summarize_by_group()` – Summarizes numeric data by groups.
+3. `plot_distribution()` – Plots a histogram of numeric variables.
+
+All of these are critical to my final project's goal of providing clean, summarized insights from raw data sources.
