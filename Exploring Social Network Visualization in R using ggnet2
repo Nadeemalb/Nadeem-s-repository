@@ -1,0 +1,62 @@
+For this assignment, I chose to explore social network analysis using RStudio and the ggnet2 package. My goal was to generate a simple visual network graph and document the steps, challenges, and takeaways from the process.
+
+Why I Chose R + ggnet2 Over NodeXL
+
+While NodeXL is a great tool for beginners due to its Excel interface, I opted for R because:
+
+I’m more comfortable coding and wanted more flexibility.
+
+R allows for deeper customization.
+
+ggnet2 integrates beautifully with ggplot2, which I’m already familiar with.
+
+To get started, I installed the necessary packages:
+
+install.packages("GGally")
+library(GGally)
+library(network)
+library(sna)
+library(ggplot2)
+
+No major issues during installation—everything worked smoothly on RStudio.
+
+Generating the Network Graph
+
+I created a random undirected network with 10 nodes:
+
+net = rgraph(10, mode = "graph", tprob = 0.5)
+net = network(net, directed = FALSE)
+network.vertex.names(net) = letters[1:10]
+ggnet2(net)
+
+The basic plot came out clean, showing a random network of 10 nodes labeled a–j.
+
+Then I customized the graph:
+
+ggnet2(net, 
+       node.size = 6, 
+       node.color = "black", 
+       edge.size = 1, 
+       edge.color = "grey")
+
+This made the visualization much more readable and aesthetically pleasing.
+
+Challenges Faced
+
+Understanding the rgraph function: I initially wasn’t sure what the tprob parameter did. After researching, I learned it controls the probability of edge creation.
+
+Node labeling: I had to use network.vertex.names() to assign meaningful names.
+
+Interactivity: ggnet2 creates static plots. For more interactive visualizations, I might look into visNetwork or networkD3 in the future.
+
+What I Learned
+
+Network visualization is a powerful way to represent relationships.
+
+Even small networks can offer insight when visualized clearly.
+
+R and ggplot2 provide a flexible and customizable environment for SNA.
+
+Overall, the experience was rewarding. While there was a bit of a learning curve, especially around network structures in R, I was able to build a working and visually appealing social network graph using ggnet2. Next time, I’d like to explore real-world datasets—perhaps from Twitter or LinkedIn—and see how this visualization scales.
+
+Final Visualization
